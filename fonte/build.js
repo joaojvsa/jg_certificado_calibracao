@@ -4,7 +4,8 @@ const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthT
   AlignmentType, ShadingType, Header, Footer, ImageRun, PageNumber, TabStopType, VerticalAlign, PageBreak } = d;
 
 const FONT = 'Arial';
-const VERDE = '5C892F', VERDE_ESC = '3F6320', VERDE_CLARO = 'EEF4E6', AZUL = '0975C3', CINZA = '4D4D4D', BORDA = 'BFD3A8';
+// Cores extraídas da logo Neoenergia
+const VERDE = '00A03C', VERDE_ESC = '007A2E', VERDE_CLARO = 'E8F5EC', LARANJA = 'F99D1C', AZUL = '00A6E6', CINZA = '4D4D4D', BORDA = 'B3DDC0';
 const CW = 10206; // largura útil (A4 com margens de 1,5 cm)
 
 const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
@@ -35,13 +36,17 @@ function secao(titulo) {
 }
 
 // ---------- Cabeçalho ----------
-const logo = fs.readFileSync(__dirname + '/logo.png');
+const logo = fs.readFileSync(__dirname + '/logo_neoenergia.png');
+const LOGO_W = 165;
+const { imageSize } = (() => { const b = fs.readFileSync(__dirname + '/logo_neoenergia.png'); return { imageSize: [b.readUInt32BE(16), b.readUInt32BE(20)] }; })();
+const LOGO_RATIO = imageSize[1] / imageSize[0];
 const header = new Header({ children: [
   grid([[
-    p(new ImageRun({ type: 'png', data: logo, transformation: { width: 150, height: 48 }, altText: { title: 'Logo', description: 'Logo Neoenergia Pernambuco', name: 'logo' } }), { after: 0 }),
+    p(new ImageRun({ type: 'png', data: logo, transformation: { width: LOGO_W, height: Math.round(LOGO_W * LOGO_RATIO) }, altText: { title: 'Logo', description: 'Logo Neoenergia Pernambuco', name: 'logo' } }), { after: 0 }),
     p(t('Laboratório de Calibração e Ensaios - LCE', { bold: true, size: 22, color: VERDE_ESC }), { align: AlignmentType.RIGHT, after: 0 }),
   ]], [3600, CW - 3600]),
-  p(t(''), { after: 120, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: VERDE, space: 4 } } }),
+  p(t(''), { after: 0, border: { bottom: { style: BorderStyle.SINGLE, size: 18, color: VERDE, space: 4 } } }),
+  p(t('', { size: 4 }), { after: 120, border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: LARANJA, space: 0 } } }),
   p(t('Certificado de Calibração', { bold: true, size: 34, color: VERDE }), { align: AlignmentType.CENTER, after: 120 }),
   grid([
     [lbl('Data de Emissão:'), val('xx/xx/xxxx'), p([t('Número do Certificado: ', { bold: true, color: CINZA }), t('xxx/2026', { bold: true })], { align: AlignmentType.RIGHT, after: 0 })],
@@ -53,7 +58,7 @@ const header = new Header({ children: [
 // ---------- Rodapé ----------
 const footer = new Footer({ children: [
   p(t('Unidade de Planejamento e Controle da Medição de Energia – EAME', { bold: true, size: 15, color: VERDE_ESC }), { after: 0,
-    border: { top: { style: BorderStyle.SINGLE, size: 12, color: VERDE, space: 4 } } }),
+    border: { top: { style: BorderStyle.SINGLE, size: 12, color: LARANJA, space: 4 } } }),
   new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CW }], spacing: { after: 0 }, children: [
     t('Rua Isaac Markman, 421 – Bongi, Recife/PE  |  CEP 50751-370  |  Fone/Fax: (81) 3217-5564', { size: 15, color: CINZA }),
     ...[['\tPágina '], [PageNumber.CURRENT], [' de '], [PageNumber.TOTAL_PAGES]].map(c => new TextRun({ font: FONT, size: 15, bold: true, color: VERDE_ESC, children: c })),
@@ -130,9 +135,9 @@ const pag2 = [
 
   p(t(''), { after: 0, before: 1300 }),
   grid([
-    [cell([p(t('Leonardo de Melo M. Behar', { bold: true }), { align: AlignmentType.CENTER, after: 0 }), p(t('Executor da Calibração', { color: CINZA }), { align: AlignmentType.CENTER, after: 0 })], 4200, { borders: { ...cellNone, top: line(VERDE, 8) } }),
+    [cell([p(t('Leonardo de Melo M. Behar', { bold: true }), { align: AlignmentType.CENTER, after: 0 }), p(t('Executor da Calibração', { color: CINZA }), { align: AlignmentType.CENTER, after: 0 })], 4200, { borders: { ...cellNone, top: line(VERDE_ESC, 8) } }),
      cell(p(t('')), CW - 8400),
-     cell([p(t('Leonardo de Melo M. Behar', { bold: true }), { align: AlignmentType.CENTER, after: 0 }), p(t('Signatário Autorizado', { color: CINZA }), { align: AlignmentType.CENTER, after: 0 })], 4200, { borders: { ...cellNone, top: line(VERDE, 8) } })],
+     cell([p(t('Pablo Forlan', { bold: true }), { align: AlignmentType.CENTER, after: 0 }), p(t('Responsável Técnico', { color: CINZA }), { align: AlignmentType.CENTER, after: 0 })], 4200, { borders: { ...cellNone, top: line(VERDE_ESC, 8) } })],
   ], [4200, CW - 8400, 4200]),
 ];
 
