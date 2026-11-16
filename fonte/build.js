@@ -43,7 +43,7 @@ const LOGO_RATIO = imageSize[1] / imageSize[0];
 const header = new Header({ children: [
   grid([[
     p(new ImageRun({ type: 'png', data: logo, transformation: { width: LOGO_W, height: Math.round(LOGO_W * LOGO_RATIO) }, altText: { title: 'Logo', description: 'Logo Neoenergia Pernambuco', name: 'logo' } }), { after: 0 }),
-    p(t('Laboratório de Calibração e Ensaios - LCE', { bold: true, size: 22, color: VERDE_ESC }), { align: AlignmentType.RIGHT, after: 0 }),
+    p(t(''), { after: 0 }),
   ]], [3600, CW - 3600]),
   p(t(''), { after: 0, border: { bottom: { style: BorderStyle.SINGLE, size: 18, color: VERDE, space: 4 } } }),
   p(t('', { size: 4 }), { after: 120, border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: LARANJA, space: 0 } } }),
