@@ -116,11 +116,17 @@ function tabela(cab, linhas) {
 const pag2 = [
   new Paragraph({ children: [new PageBreak()] }),
   secao('Resultados'),
-  p(t('Tensão', { bold: true, color: VERDE_ESC }), { before: 60, after: 80, keepNext: true }),
-  tabela(['Valor Referência (V)', 'Faixa Limite', 'Valor Medido', 'Erro%', 'Incerteza'], [
-    ['201', '200,0 - 202,0 V', '190,00', '-5,47', '0,17'],
-    ['220', '218,9 - 221,1 V', '222,00', '0,91', '0,17'],
-    ['231', '229,8 - 232,2 V', '229,00', '-0,87', '0,17'],
+  ...[
+    ['Tensão – Fase A', ['190,00', '-5,47', '0,17'], ['222,00', '0,91', '0,17'], ['229,00', '-0,87', '0,17']],
+    ['Tensão – Fase B', ['', '', ''], ['', '', ''], ['', '', '']],
+    ['Tensão – Fase C', ['', '', ''], ['', '', ''], ['', '', '']],
+  ].flatMap(([titulo, r1, r2, r3], i) => [
+    p(t(titulo, { bold: true, color: VERDE_ESC }), { before: i ? 240 : 60, after: 80, keepNext: true }),
+    tabela(['Valor Referência (V)', 'Faixa Limite', 'Valor Medido', 'Erro%', 'Incerteza'], [
+      ['201', '200,0 - 202,0 V', ...r1],
+      ['220', '218,9 - 221,1 V', ...r2],
+      ['231', '229,8 - 232,2 V', ...r3],
+    ]),
   ]),
 
   p(t('Convenções:', { bold: true, size: 16, color: CINZA }), { before: 280, after: 40 }),
