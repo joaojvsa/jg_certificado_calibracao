@@ -134,11 +134,11 @@ const pag2 = [
   p(t('Incerteza: incerteza expandida de medição para um nível de confiança de aproximadamente 95%.', { size: 16, color: CINZA }), { after: 0 }),
 
   p(t(''), { after: 0, before: 1300 }),
-  grid([
-    [cell([p(t('Leonardo de Melo M. Behar', { bold: true }), { align: AlignmentType.CENTER, after: 0 }), p(t('Executor da Calibração', { color: CINZA }), { align: AlignmentType.CENTER, after: 0 })], 4200, { borders: { ...cellNone, top: line(VERDE_ESC, 8) } }),
-     cell(p(t('')), CW - 8400),
-     cell([p(t('Pablo Forlan', { bold: true }), { align: AlignmentType.CENTER, after: 0 }), p(t('Responsável Técnico', { color: CINZA }), { align: AlignmentType.CENTER, after: 0 })], 4200, { borders: { ...cellNone, top: line(VERDE_ESC, 8) } })],
-  ], [4200, CW - 8400, 4200]),
+  grid([[
+    cell(p(t('')), (CW - 4200) / 2),
+    cell([p(t('Pablo Forlan', { bold: true }), { align: AlignmentType.CENTER, after: 0 }), p(t('Responsável Técnico', { color: CINZA }), { align: AlignmentType.CENTER, after: 0 })], 4200, { borders: { ...cellNone, top: line(VERDE_ESC, 8) } }),
+    cell(p(t('')), (CW - 4200) / 2),
+  ]], [(CW - 4200) / 2, 4200, (CW - 4200) / 2]),
 ];
 
 const doc = new Document({
