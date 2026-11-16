@@ -57,10 +57,9 @@ const header = new Header({ children: [
 
 // ---------- Rodapé ----------
 const footer = new Footer({ children: [
-  p(t('Unidade de Planejamento e Controle da Medição de Energia – EAME', { bold: true, size: 15, color: VERDE_ESC }), { after: 0,
-    border: { top: { style: BorderStyle.SINGLE, size: 12, color: LARANJA, space: 4 } } }),
-  new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CW }], spacing: { after: 0 }, children: [
-    t('Rua Isaac Markman, 421 – Bongi, Recife/PE  |  CEP 50751-370  |  Fone/Fax: (81) 3217-5564', { size: 15, color: CINZA }),
+  new Paragraph({ tabStops: [{ type: TabStopType.RIGHT, position: CW }], spacing: { after: 0 },
+    border: { top: { style: BorderStyle.SINGLE, size: 12, color: LARANJA, space: 4 } }, children: [
+    t('Unidade de Planejamento de Redes', { bold: true, size: 15, color: VERDE_ESC }),
     ...[['\tPágina '], [PageNumber.CURRENT], [' de '], [PageNumber.TOTAL_PAGES]].map(c => new TextRun({ font: FONT, size: 15, bold: true, color: VERDE_ESC, children: c })),
   ] }),
 ] });
@@ -85,7 +84,7 @@ const pag1 = [
     [lbl('Descrição:'), val('Multicalibrador'), lbl('Número de Identificação:'), val('0026.0')],
     [lbl('Fabricante:'), val('Fluke'), lbl('Modelo:'), val('5520A')],
     [lbl('Número de Série:'), val('9319010'), lbl('Rastreabilidade:'), val('Certificado de Calibração nº F3389004')],
-    [lbl('Resolução do Padrão:'), val('Tensão: xx,xx  |  Corrente: xx,xx'), lbl(''), val('')],
+    [lbl('Resolução do Padrão:'), val('Tensão: xx,xx'), lbl(''), val('')],
   ], [2300, 3200, 2200, CW - 7700]),
 
   secao('Informações Pertinentes à Calibração'),
@@ -122,11 +121,6 @@ const pag2 = [
     ['201', '200,0 - 202,0 V', '190,00', '-5,47', '0,17'],
     ['220', '218,9 - 221,1 V', '222,00', '0,91', '0,17'],
     ['231', '229,8 - 232,2 V', '229,00', '-0,87', '0,17'],
-  ]),
-  p(t('Corrente', { bold: true, color: VERDE_ESC }), { before: 280, after: 80, keepNext: true }),
-  tabela(['Valor Referência (A)', 'Faixa Limite', 'Valor Medido', 'Erro%', 'Incerteza'], [
-    ['50', '49 - 51 A', '48,00', '-4,00', '0,13'],
-    ['100', '98 - 102 A', '104,00', '4,00', '0,13'],
   ]),
 
   p(t('Convenções:', { bold: true, size: 16, color: CINZA }), { before: 280, after: 40 }),
